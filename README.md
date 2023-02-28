@@ -1,3 +1,3 @@
 # danger-test
 
-sugoi repo
+tameni naru repo
