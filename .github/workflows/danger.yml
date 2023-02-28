@@ -5,16 +5,20 @@ on:
   pull_request:
     branches-ignore: [develop, release/**]
   workflow_dispatch:
+
 jobs:
   danger:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Change owner
+        shell: bash
+        run: |
+          sudo chown -R root /__w/mntsq
+          sudo chmod -R a+w /__w/mntsq
       - name: Run Danger
         uses: actionshub/danger-rb@main
         env:
