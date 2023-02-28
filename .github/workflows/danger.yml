@@ -17,8 +17,8 @@ jobs:
       - name: Change owner
         shell: bash
         run: |
-          sudo chown -R root /__w/mntsq
-          sudo chmod -R a+w /__w/mntsq
+          sudo chown -R root /github/workspace
+          sudo chmod -R a+w /github/workspace
       - name: Run Danger
         uses: actionshub/danger-rb@main
         env:
