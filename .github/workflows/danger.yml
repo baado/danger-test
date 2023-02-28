@@ -20,7 +20,7 @@ jobs:
           pwd
           whoami
           sudo mkdir -p /github/workspace
-          sudo chown -R root /github/workspace
+          sudo chown -R runner /github/workspace
           sudo chmod -R a+w /github/workspace
           sudo git config --global --add safe.directory /github/workspace
       - name: Run Danger
