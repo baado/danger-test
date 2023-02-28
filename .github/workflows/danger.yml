@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           pwd
-          sudo mkdir /github/workspace
+          sudo mkdir -p /github/workspace
           sudo chown -R root /github/workspace
           sudo chmod -R a+w /github/workspace
       - name: Run Danger
