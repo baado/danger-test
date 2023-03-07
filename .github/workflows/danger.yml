@@ -10,20 +10,21 @@ jobs:
   danger:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Change owner
-        shell: bash
-        run: |
-          pwd
-          whoami
-          sudo mkdir -p /github/workspace
-          sudo chown -R runner /github/workspace
-          sudo chmod -R a+w /github/workspace
-          sudo git config --global --add safe.directory /github/workspace
-      - name: Run Danger
-        uses: actionshub/danger-rb@main
-        env:
-          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile') }} # change your gemfile path
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - uses: baado/danger-action@v5
+      with:
+        plugins_file: 'Gemfile'
+        install_path: 'vendor/bundle'
+        danger_file: 'Dangerfile'
+        danger_id: 'danger-pr'
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
