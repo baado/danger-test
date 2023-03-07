@@ -20,7 +20,7 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile') }} # change your gemfile path
         restore-keys: |
           ${{ runner.os }}-gems-
-    - uses: MeilCli/danger-action@v5
+    - uses: baado/danger-action@v5
       with:
         plugins_file: 'Gemfile'
         install_path: 'vendor/bundle'
